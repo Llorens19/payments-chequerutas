@@ -4,6 +4,8 @@ config();
 import 'reflect-metadata';
 import Fastify from "fastify";
 import cors from "@fastify/cors";
+import Stripe from "stripe";
+import paymentRoutes from '@/modules/payment/presentation/payment.routes';
 
 
 
@@ -26,6 +28,8 @@ const start = async () => {
         }
       }
     });
+
+    app.register(paymentRoutes);
 
     await app.listen({
       port: Number(process.env.PORT) || 4002,
