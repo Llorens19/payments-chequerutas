@@ -1,5 +1,5 @@
 {
-  "name": "backend-fastify-stripe-viasana",
+  "name": "backend-fastify-payments-chequerutas",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
