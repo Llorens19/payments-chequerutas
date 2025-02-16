@@ -17,6 +17,4 @@ export class PaymentRepoAdapter implements IPaymentOutputPort {
       payment_method_types: ['card'],
     });
   }
-
-
 }
