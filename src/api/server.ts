@@ -4,7 +4,6 @@ config();
 import 'reflect-metadata';
 import Fastify from "fastify";
 import cors from "@fastify/cors";
-import Stripe from "stripe";
 import paymentRoutes from '@/modules/payment/presentation/payment.routes';
 
 
@@ -17,11 +16,26 @@ const start = async () => {
     const app = Fastify({ logger: false });
 
 
+    // await app.register(cors, {
+    //   origin: (origin, callback) => {
+    //     const urls_allowed = process.env.CORS_URLS?.split(",") || [];
+
+    //     if (!origin || urls_allowed.includes(origin)) {
+    //       callback(null, true);
+    //     } else {
+    //       callback(new Error("No permitido por CORS"), false);
+    //     }
+    //   }
+    // });
+
+
     await app.register(cors, {
       origin: (origin, callback) => {
-        const urls_allowed = process.env.CORS_URLS?.split(",") || [];
+        const urls_allowed = process.env.CORS_URLS ? process.env.CORS_URLS.split(",") : [];
 
-        if (!origin || urls_allowed.includes(origin)) {
+        console.log("Orígenes permitidos:", urls_allowed);
+
+        if (!origin || urls_allowed.length === 0 || urls_allowed.includes(origin)) {
           callback(null, true);
         } else {
           callback(new Error("No permitido por CORS"), false);
